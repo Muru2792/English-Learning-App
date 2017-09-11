@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "222826060277",
+    "firebase_url": "https://easy-english-e950d.firebaseio.com",
+    "project_id": "easy-english-e950d",
+    "storage_bucket": "easy-english-e950d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:222826060277:android:3078ee79b12f2d9a",
+        "android_client_info": {
+          "package_name": "in22labs.englishlearning"
+        }
+      },
+      "oauth_client": [
+	   {
+          "client_id": "222826060277-qq5f8o175l1jvivtp3gj0be41193nksg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in22labs.englishlearning",
+            "certificate_hash": "ae716892632f24624628090652b284fe2e876a37"
+          }
+        },
+        {
+          "client_id": "222826060277-9algum67hac24l8rli9envek7bcl6mh2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLxChHEpRQnRUITlQXqDg44FbDGOOOeBw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "222826060277-9algum67hac24l8rli9envek7bcl6mh2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,21 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">English Learning</string>
+    <string name="title_activity_vocabquiz">Vocabquiz</string>
+    <string name="title_activity_testmodule">Testmodule</string>
+    <string name="apscc_fc_unemployed_youth_login">TANSCHE \n Easy English App</string>
+    <string name="starttest">பெயர் கேட்க மற்றும் பெயரை சொல்ல கற்று கொள்ளுங்கள்</string>
+    <string name="startgame">Spelling game on பெயர் கேட்க மற்றும் பெயரை சொல்ல கற்று கொள்ளுங்கள்</string>
+    <string name="startbonus">The Nation Wants to Know About Arnab‘s Photo Shoot!</string>
+    <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+    <string name="loading">Please wait</string>
+    <string name="facebook_app_id">1428262493920046</string>
+    <string name="fb_login_protocol_scheme">fb1428262493920046</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="GPSAlertDialogTitle">Alert</string>
+    <string name="GPSAlertDialogMessage">enable gps</string>
+    <string name="action_settings">Setting</string>
+    <string name="cancel">Cancel</string>
+
+</resources>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg771"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="0.5">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="User Name"
+                    android:textSize="18sp"
+                    android:layout_weight="0.7"
+                    android:textColor="#795548"
+                    android:paddingLeft="5dp"
+                    android:id="@+id/myrank_name"
+                    android:textStyle="italic|normal"/>
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/myrank_edit"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/ic_mode_edit_black_18dp"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="email"
+                android:padding="5dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/myrank_email"
+                android:textColor="#d81b60"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/myrank_id"
+                android:text="My App ID: APP1011"
+                android:textColor="#c62828"/>
+        </LinearLayout>
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/profile_circular_border_imageview"/>
+    </LinearLayout>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs1"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        android:background="#80cbc4"
+        app:tabIndicatorColor="@color/orange"
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.design.widget.TabLayout>
+
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
+
+
+
+</LinearLayout>

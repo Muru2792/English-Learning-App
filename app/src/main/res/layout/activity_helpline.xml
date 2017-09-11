@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg771"
+    tools:context="in22labs.englishlearning.Helpline">
+      <ListView
+        android:id="@+id/listView_helplineanswer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:listSelector="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        android:clickable="true"
+        android:visibility="gone"
+        android:background="#f9fbe7"
+        android:dividerHeight="2dp"
+        />
+    <ListView
+        android:id="@+id/listView_helpline"
+        android:layout_below="@+id/listView_helplineanswer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:listSelector="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        android:clickable="true"
+        android:layout_marginTop="10dp"
+        android:background="#f9fbe7"
+        android:dividerHeight="2dp" />
+
+</RelativeLayout>

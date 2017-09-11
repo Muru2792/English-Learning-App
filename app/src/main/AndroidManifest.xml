@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="in22labs.englishlearning">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
+    <uses-feature android:name="android.hardware.location.gps" />
+
+    <meta-data
+        android:name="com.google.firebase.messaging.default_notification_icon"
+        android:resource="@mipmap/ic_launcher" />
+    <!--
+         Set color used with incoming notification messages. This is used when no color is set for the incoming
+         notification message. See README(https://goo.gl/6BKBk7) for more.
+    -->
+    <meta-data
+        android:name="com.google.firebase.messaging.default_notification_color"
+        android:resource="@color/colorAccent" />
+
+    <application
+        android:name=".Utils.MyApplication"
+        android:allowBackup="true"
+        android:hardwareAccelerated="false"
+        android:icon="@drawable/applogo"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:screenOrientation="portrait"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Framework.FlipGame.Flipgame"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Framework.FlipGame.FlipResult"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Framework.vocabulary.Vocab"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Framework.vocabulary.Vocabquiz"
+            android:label="@string/title_activity_vocabquiz"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Framework.Testmodule.Testmodule"
+            android:label="@string/title_activity_testmodule"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Framework.Testmodule.Startscreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Framework.Testmodule.Multiplechoice"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Framework.Testmodule.Dragactivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Framework.Testmodule.ResultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PracticeHome.NewsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".PracticeHome.Newsdetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PracticeHome.ConversationActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".VideoHome.VideosActivity" />
+        <activity android:name=".PracticeHome.AudiosActivity" />
+        <activity android:name=".PracticeHome.BooksActivity" />
+        <activity android:name=".PracticeHome.GameActivity" />
+        <activity android:name=".Helpline" />
+
+        <receiver android:name=".Utils.customHandler" />
+
+
+        <activity android:name=".DictionaryHome.Dictionary" />
+        <activity android:name=".VideoHome.VideoList" />
+        <activity android:name=".ProfileManagement.CityrankActivity" />
+
+        <service android:name=".notifications.FirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service android:name=".Utils.GPSTracker"/>
+    </application>
+
+</manifest>

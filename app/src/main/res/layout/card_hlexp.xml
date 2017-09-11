@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="20dp"
+    android:padding="10dp"
+    android:background="@drawable/textbackground"
+    android:elevation="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="கீழ்கண்ட விருப்பத்தேர்வுகளிலிருந்து சரியான விடையைத் தேர்வு செய்யவும்."
+                android:textSize="16sp"
+                android:textColor="#ff0000"
+                android:layout_gravity="center"
+                android:layout_weight="0.5"/>
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="0"
+                android:layout_margin="10dp"
+                android:id="@+id/im_coins"
+                android:visibility="gone"
+                android:background="@drawable/coin200"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="summary"
+            android:id="@+id/helplineExpSummary"
+            android:textColor="#000000"
+            android:padding="10dp"
+            android:textSize="16sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="question"
+            android:id="@+id/helplineExpQuestion"
+            android:textColor="#000000"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"/>
+
+</LinearLayout>
