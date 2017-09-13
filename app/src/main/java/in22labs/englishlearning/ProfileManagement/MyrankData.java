@@ -1,8 +1,19 @@
 package in22labs.englishlearning.ProfileManagement;
 
 import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -10,6 +21,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
@@ -22,6 +34,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,9 +48,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.location.LocationListener;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 import in22labs.englishlearning.R;
 import in22labs.englishlearning.Utils.GPSTracker;
@@ -46,7 +62,7 @@ import in22labs.englishlearning.Utils.SessionManager;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 
-public class MyrankData extends Fragment {
+public class MyrankData extends Fragment implements View.OnClickListener{
 
     public static TabLayout tabLayout;
     public static ViewPager viewPager;
@@ -60,7 +76,11 @@ public class MyrankData extends Fragment {
     private LocationManager locationManager;
     private String provider;
     Context mContext;
+    ImageView im_profilepic;
     GPSTracker gps;
+    Bitmap bm;
+    Boolean ju=true;
+    private static final int PICK_FROM_GALLERY = 2;
     //    InterstitialAd interAd;
 //    ConnectionDetector cd;
     @Nullable
@@ -68,95 +88,27 @@ public class MyrankData extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         mContext = getActivity();
+        View x = inflater.inflate(R.layout.tab_layout1, null);
         Toolbar tool = (Toolbar) getActivity().findViewById(R.id.toolbar);
         TextView ab = (TextView) tool.findViewById(R.id.toolbar_title);
         ab.setText("College Profile");
         txt_username = (TextView) getActivity().findViewById(R.id.myrank_name);
         session = new SessionManager(getActivity());
         ab.setTextSize(20.0f);
+        im_profilepic=(ImageView)x.findViewById(R.id.profileupdate);
 //        cd=new ConnectionDetector(getActivity());
 
 
-        View x = inflater.inflate(R.layout.tab_layout1, null);
+
         tabLayout = (TabLayout) x.findViewById(R.id.tabs1);
         viewPager = (ViewPager) x.findViewById(R.id.viewpager1);
-//        try {
-//            db = new DatabaseHelper(getActivity());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
-//        Index = getArguments().getString("Index");
-//        if(Index.equals("1")){
-//            CollegeCode= getArguments().getString("clgcode");
-//
-//            if (  Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD_MR1) {
-//                if (!cd.isConnectingToInternet()) {
-//                    // Internet Connection is not present
-//
-//                } else {
-//                    //fullBanner();
-//                }
-//            }
-//
-//
-//        }else if(Index.equals("2")) {
-//            CollegeName = getArguments().getString("clgname");
-//            CollegeCode= db.getCollegeCode(CollegeName);
-//        }
-
-//        // Get the location manager
-//        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-//        // Define the criteria how to select the locatioin provider -> use
-//        // default
-//        Criteria criteria = new Criteria();
-//        provider = locationManager.getBestProvider(criteria, false);
-//        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//
-//            //    ActivityCompat#requestPermissions
-//            // here to request the missing permissions, and then overriding
-//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//            //                                          int[] grantResults)
-//            // to handle the case where the user grants the permission. See the documentation
-//            // for ActivityCompat#requestPermissions for more details.
-//            return null;
-//        }
-//        Location location = locationManager.getLastKnownLocation(provider);
-//
-//        // Initialize the location fields
-//        if (location != null) {
-//            System.out.println("Provider " + provider + " has been selected.");
-//            Toast.makeText(getActivity(), "hi", Toast.LENGTH_SHORT).show();
-//            onLocationChanged(location);
-//        } else {
-//            Toast.makeText(getActivity(), "hihhh", Toast.LENGTH_SHORT).show();
-//        }
+        getPhotoRouund();
 
 
-        gps = new GPSTracker(mContext);
 
-        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
-        } else {
-            Toast.makeText(mContext,"You need have granted permission",Toast.LENGTH_SHORT).show();
-            gps = new GPSTracker(mContext);
 
-            // Check if GPS enabled
-//            if (gps.canGetLocation()) {
-
-                double latitude = gps.getLatitude();
-                double longitude = gps.getLongitude();
-
-                // \n is for new line
-                Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
-//            } else {
-                // Can't get location.
-                // GPS or network is not enabled.
-                // Ask user to enable GPS/network in settings.
-                gps.showSettingsAlert();
-//            }
-        }
         viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
         tabLayout.post(new Runnable() {
             @Override
@@ -164,7 +116,96 @@ public class MyrankData extends Fragment {
                 tabLayout.setupWithViewPager(viewPager);
             }
         });
+
+        im_profilepic.setOnClickListener(this);
         return x;
+    }
+
+    private void getPhotoRouund() {
+
+        File file = new File(Environment.getExternalStorageDirectory()+ File.separator + "English App/Photo/Photo.jpg");
+
+        if(file.exists()){
+
+            bm = BitmapFactory.decodeFile(file.getAbsolutePath());
+        }else{
+            bm = BitmapFactory.decodeResource(getResources(), R.drawable.avatar);
+        }
+
+        im_profilepic.setImageBitmap(getCircleBitmap(bm));
+
+    }
+
+    private Bitmap getCircleBitmap(Bitmap bitmap) {
+        final Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        final Canvas canvas = new Canvas(output);
+
+        final int color = Color.RED;
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final RectF rectF = new RectF(rect);
+
+
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+
+        canvas.drawOval(rectF, paint);
+
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+
+        bitmap.recycle();
+
+
+        return output;
+    }
+
+    private void SaveImage(Bitmap finalBitmap) {
+
+        String root = Environment.getExternalStorageDirectory().toString();
+        File myDir = new File(root + "/English App/Photo");
+        myDir.mkdirs();
+
+
+        Random generator = new Random();
+        int n = 10000;
+        n = generator.nextInt(n);
+        //String fname = "Image-" + n + ".jpg";
+        String fname1 = "Photo.jpg";
+
+        File file = new File(myDir, fname1);
+        if (file.exists()) file.delete();
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        Toast.makeText(MainActivity.this, "Write function  "+ file.getAbsolutePath().toString(), Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == PICK_FROM_GALLERY) {
+            if (data != null) {
+
+                Bundle extras2 = data.getExtras();
+                if (extras2 != null) {
+                    Bitmap photo = extras2.getParcelable("data");
+
+                    SaveImage(photo);
+                    getPhotoRouund();
+
+                }
+            }
+        }
     }
 
     @Override
@@ -210,6 +251,30 @@ public class MyrankData extends Fragment {
 
     }
 }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==R.id.profileupdate){
+            ju=false;
+            Intent intent = new Intent();
+            // call android default gallery
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            // ******** code for crop image
+            intent.putExtra("crop", "true");
+            intent.putExtra("aspectX", 1);
+            intent.putExtra("aspectY", 1);
+            intent.putExtra("outputX", 300);
+            intent.putExtra("outputY", 300);
+            intent.putExtra("return-data", true);
+
+            try {
+               startActivityForResult(Intent.createChooser(intent, "Complete action using"), PICK_FROM_GALLERY);
+            } catch (ActivityNotFoundException e) {
+                // Do nothing for now
+            }
+        }
+    }
 
     class MyAdapter extends FragmentPagerAdapter {
 

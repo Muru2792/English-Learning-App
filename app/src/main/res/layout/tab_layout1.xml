@@ -57,6 +57,7 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:id="@+id/profileupdate"
             android:background="@drawable/profile_circular_border_imageview"/>
     </LinearLayout>
 
