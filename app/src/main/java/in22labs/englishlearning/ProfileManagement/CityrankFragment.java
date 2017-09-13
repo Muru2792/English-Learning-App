@@ -133,7 +133,7 @@ public class CityrankFragment extends Fragment implements ConnectionCallbacks,
             {
                 runNetworkGPS(slati, slongi);
             }
-            txt_rankcity.setText("MY RANK IN "+removeDuplicates(strlocationAddress));
+            txt_rankcity.setText("MY RANK IN THE "+removeDuplicates(strlocationAddress));
             city_toprank.setText("TOP RANKER IN "+strlocationAddress);
             city_rankoverall.setText("Your "+strlocationAddress+" rank, out of 640 learners is 300");
             //  ChangesMap(slati,slongi,strlocationAddress);
