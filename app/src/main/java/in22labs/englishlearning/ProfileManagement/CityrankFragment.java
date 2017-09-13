@@ -37,12 +37,16 @@ import com.google.android.gms.location.LocationServices;
 
 
 import java.io.IOException;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 
 import in22labs.englishlearning.R;
+import in22labs.englishlearning.Utils.AppLocationService;
 import in22labs.englishlearning.Utils.LocationAddress;
 import in22labs.englishlearning.Utils.Utils;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 public class CityrankFragment extends Fragment implements ConnectionCallbacks,
@@ -125,11 +129,47 @@ public class CityrankFragment extends Fragment implements ConnectionCallbacks,
                 default:
                     strlocationAddress = "No Address found on your location";
             }
-            txt_rankcity.setText("MY RANK IN "+strlocationAddress);
+            if(strlocationAddress.equals("Address not found"))
+            {
+                runNetworkGPS(slati, slongi);
+            }
+            txt_rankcity.setText("MY RANK IN "+removeDuplicates(strlocationAddress));
             city_toprank.setText("TOP RANKER IN "+strlocationAddress);
             city_rankoverall.setText("Your "+strlocationAddress+" rank, out of 640 learners is 300");
             //  ChangesMap(slati,slongi,strlocationAddress);
+            Utils.ShowToast(getActivity(), slati+" "+slongi);
         }
+    }
+
+    private void runNetworkGPS(double lat, double lang) {
+        AppLocationService appLocationService = new AppLocationService(getActivity());
+        Location nwLocation = appLocationService
+                .getLocation(LocationManager.NETWORK_PROVIDER);
+
+        if (nwLocation != null) {
+            double latitude = nwLocation.getLatitude();
+            double longitude = nwLocation.getLongitude();
+            Toast.makeText(
+                    getApplicationContext(),
+                    "Mobile Location (NW): \nLatitude: " + latitude
+                            + "\nLongitude: " + longitude,
+                    Toast.LENGTH_LONG).show();
+
+        } else {
+            Location lLocation = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
+            if (lLocation != null){
+                double latitude = lLocation.getLatitude();
+                double longitude = lLocation.getLongitude();
+                Toast.makeText(
+                        getApplicationContext(),
+                        "Mobile Location (NW): \nLatitude: " + latitude
+                                + "\nLongitude: " + longitude,
+                        Toast.LENGTH_LONG).show();
+            }
+        }
+//        LocationAddress locationAddress = new LocationAddress();
+//        locationAddress.getAddressFromLocation(lat, lang,
+//                getActivity(), new GeocoderHandler());
     }
 
     @Override
@@ -202,10 +242,10 @@ public class CityrankFragment extends Fragment implements ConnectionCallbacks,
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            return;
+            LocationServices.FusedLocationApi.requestLocationUpdates(
+                    mGoogleApiClient, mLocationRequest, this);
         }
-        LocationServices.FusedLocationApi.requestLocationUpdates(
-                mGoogleApiClient, mLocationRequest, this);
+
 
     }
 
@@ -379,5 +419,20 @@ public class CityrankFragment extends Fragment implements ConnectionCallbacks,
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {}
+    }
+
+    String removeDuplicates(String str)
+    {
+        String result="";
+        LinkedHashSet<Character> lhs = new LinkedHashSet<>();
+        for(int i=0;i<str.length();i++)
+            lhs.add(str.charAt(i));
+
+        // print string after deleting duplicate elements
+        for(Character ch : lhs)
+           result+=ch;
+
+
+        return result;
     }
 }

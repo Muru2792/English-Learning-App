@@ -28,10 +28,12 @@ public class LocationAddress {
                     if (addressList != null && addressList.size() > 0) {
                         Address address = addressList.get(0);
                         StringBuilder sb = new StringBuilder();
-//                        for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
+                        for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
 //                            sb.append(address.getAddressLine(i)).append("\n");
 //                        }
-                        sb.append(address.getLocality()).append("\n");
+//                            sb.append(address.getLocality());
+                            sb.append(address.getLocality());
+                        }
 //                        sb.append(address.getPostalCode()).append("\n");
 //                        sb.append(address.getCountryName());
                         result = sb.toString();
